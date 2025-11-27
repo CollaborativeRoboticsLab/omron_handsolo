@@ -1,0 +1,18 @@
+services:
+  omron_handsolo:
+    container_name: omron_handsolo
+    image: ghcr.io/collaborativeroboticslab/omron_handsolo:humble
+    command: ros2 launch moma_ros ld250_tm12x.teleop.launch.py
+    environment:
+      - PYTHONUNBUFFERED=1                # GUI related
+      - DISPLAY                           # GUI related
+      - QT_X11_NO_MITSHM=1                # GUI related
+      - NVIDIA_VISIBLE_DEVICES=all        # GUI related
+      - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
+      - ROS_DOMAIN_ID=0
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    volumes:
+      - /dev:/dev
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw    # GUI related
