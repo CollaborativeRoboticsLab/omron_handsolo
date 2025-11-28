@@ -79,7 +79,7 @@ WORKDIR /
 
 #############################################################################################################################
 #####
-#####   Remove workspace source and build files that are not relevent to running the system
+#####   Remove workspace source and build files that are not relevant to running the system
 #####
 #############################################################################################################################
 
