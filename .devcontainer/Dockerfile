@@ -7,8 +7,8 @@ ARG USERNAME=ubuntu
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+# RUN groupadd --gid $USER_GID $USERNAME \
+#     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
 
 RUN apt-get update && apt-get upgrade -y \
     && rm -rf /var/lib/apt/lists/*
@@ -58,6 +58,6 @@ RUN git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git -b d
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git -b develop
 
 # Install python packages
-RUN pip3 install --no-cache-dir pymodbus
+RUN pip3 install --no-cache-dir --break-system-packages pymodbus
 
 ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
