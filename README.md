@@ -29,8 +29,8 @@ pip install pymodbus
 Clone the repositories into the `src` folder by
 
 ```sh
-git clone https://github.com/CollaborativeRoboticsLab/omron_arm.git
-git clone https://github.com/CollaborativeRoboticsLab/omron_base.git
+git clone https://github.com/CollaborativeRoboticsLab/tmr_ros2.git
+git clone https://github.com/CollaborativeRoboticsLab/omron_amr.git
 git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git
 git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git
 git clone https://github.com/CollaborativeRoboticsLab/omron_handsolo.git

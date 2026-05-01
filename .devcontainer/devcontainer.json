@@ -1,5 +1,5 @@
 {
-  "name": "Omron Moma humble",
+  "name": "Omron Handsolo humble",
   "dockerFile": "Dockerfile",
   "remoteUser": "ubuntu",
   "containerEnv": {
