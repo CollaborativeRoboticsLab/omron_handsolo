@@ -55,7 +55,7 @@ RUN pip3 install --no-cache-dir --break-system-packages pymodbus
 WORKDIR ${WORKSPACE_ROOT}/src
 
 RUN git clone https://github.com/CollaborativeRoboticsLab/tmr_ros2.git 
-RUN git clone https://github.com/CollaborativeRoboticsLab/omron_amr.git
+RUN git clone --recurse-submodules https://github.com/CollaborativeRoboticsLab/omron_amr.git
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_handsolo.git
