@@ -2,8 +2,8 @@
 
 This repository allows connecting a Digital twin using packages,
 
-- [omron_arm](https://github.com/CollaborativeRoboticsLab/omron_arm) package 
-- [omron_base](https://github.com/CollaborativeRoboticsLab/omron_base) package
+- [tmr_ros2](https://github.com/CollaborativeRoboticsLab/tmr_ros2) package 
+- [omron_amr](https://github.com/CollaborativeRoboticsLab/omron_amr) package
 - [omron_gripper](https://github.com/CollaborativeRoboticsLab/omron_gripper.git) package
 - [omron_moma](https://github.com/CollaborativeRoboticsLab/omron_moma.git) package
 

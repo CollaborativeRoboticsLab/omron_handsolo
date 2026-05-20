@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------------------------------------------------------
 
 # Use a base image suitable for Raspberry Pi with ROS 2 Humble
-FROM ros:humble-ros-base-jammy AS base
+FROM ros:humble AS base
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -50,7 +50,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-joint-state-publisher-gui \
     ros-${ROS_DISTRO}-vision-opencv \
     ros-${ROS_DISTRO}-teleop-twist-joy \
-    ros-${ROS_DISTRO}-joy 
+    ros-${ROS_DISTRO}-joy \
+    ros-${ROS_DISTRO}-rqt-tf-tree \
 
 # Install python packages
 RUN pip3 install --no-cache-dir pymodbus
@@ -64,16 +65,16 @@ RUN pip3 install --no-cache-dir pymodbus
 # Create and clone workspace
 WORKDIR ${WORKSPACE_ROOT}/src
 
-RUN git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git
-RUN git clone https://github.com/CollaborativeRoboticsLab/omron_arm.git 
-RUN git clone https://github.com/CollaborativeRoboticsLab/omron_base.git
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git
+RUN git clone https://github.com/CollaborativeRoboticsLab/tmr_ros2.git -b humble
+RUN git clone https://github.com/CollaborativeRoboticsLab/omron_amr.git -b humble
+RUN git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git -b humble
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_handsolo.git
 
 WORKDIR ${WORKSPACE_ROOT}
 
 # Build the workspace
-RUN . /opt/ros/humble/setup.sh && colcon build
+RUN . /opt/ros/${ROS_DISTRO}/setup.sh && colcon build
 
 WORKDIR /
 
