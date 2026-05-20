@@ -19,17 +19,6 @@ ENV WORKSPACE_ROOT=/omron_ws
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libx11-dev \
-    libxext-dev \
-    libxtst-dev \
-    libxrender-dev \
-    libxrandr-dev \
-    libgl1-mesa-glx \
-    libglu1-mesa \
-    libxi-dev \
-    libsm6 \
-    libxkbcommon-x11-0 \
-    x11-xserver-utils \
     git \
     python3-pip \
     python3-colcon-common-extensions \
@@ -43,14 +32,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-nav2-bringup \
     ros-${ROS_DISTRO}-slam-toolbox \
     ros-${ROS_DISTRO}-moveit \
+    ros-${ROS_DISTRO}-rviz2 \
     ros-${ROS_DISTRO}-controller-manager \
     ros-${ROS_DISTRO}-joint-trajectory-controller \
     ros-${ROS_DISTRO}-joint-state-broadcaster \
     ros-${ROS_DISTRO}-joint-state-publisher \
-    ros-${ROS_DISTRO}-joint-state-publisher-gui \
     ros-${ROS_DISTRO}-vision-opencv \
     ros-${ROS_DISTRO}-teleop-twist-joy \
-    ros-${ROS_DISTRO}-joy 
+    ros-${ROS_DISTRO}-joy \
+ && rm -rf /var/lib/apt/lists/*
 
 # Install python packages
 RUN pip3 install --no-cache-dir --break-system-packages pymodbus
