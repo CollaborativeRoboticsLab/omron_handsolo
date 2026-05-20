@@ -51,7 +51,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-vision-opencv \
     ros-${ROS_DISTRO}-teleop-twist-joy \
     ros-${ROS_DISTRO}-joy \
-    ros-${ROS_DISTRO}-rqt-tf-tree \
+    ros-${ROS_DISTRO}-rqt-tf-tree
 
 # Install python packages
 RUN pip3 install --no-cache-dir pymodbus
