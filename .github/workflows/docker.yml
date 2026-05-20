@@ -1,4 +1,4 @@
-name: ROS Humble Omron Handsolo Control stack
+name: ROS Jazzy Omron Handsolo Control stack
 
 on:
   workflow_dispatch:
@@ -54,4 +54,4 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:jazzy

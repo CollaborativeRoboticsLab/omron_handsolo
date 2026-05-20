@@ -1,13 +1,24 @@
 # omron_handsolo
 
+
+
 This repository allows connecting a Digital twin using packages,
 
-- [omron_arm](https://github.com/CollaborativeRoboticsLab/omron_arm) package 
-- [omron_base](https://github.com/CollaborativeRoboticsLab/omron_base) package
+- [tmr_ros2](https://github.com/CollaborativeRoboticsLab/tmr_ros2) package 
+- [omron_amr](https://github.com/CollaborativeRoboticsLab/omron_amr) package
 - [omron_gripper](https://github.com/CollaborativeRoboticsLab/omron_gripper.git) package
 - [omron_moma](https://github.com/CollaborativeRoboticsLab/omron_moma.git) package
 
 For supported features and limitations, see the individual repositories on the features supported by the MoMa.
+
+## Branch Status
+
+| Branch | ROS2 Version | Compile |
+|--------|--------------|---------|
+| main | Jazzy | [![main](https://github.com/CollaborativeRoboticsLab/omron_handsolo/actions/workflows/compile.yml/badge.svg?branch=main)](https://github.com/CollaborativeRoboticsLab/omron_handsolo/actions/workflows/compile.yml?query=branch%3Amain) |
+| develop | Jazzy | [![develop](https://github.com/CollaborativeRoboticsLab/omron_handsolo/actions/workflows/compile.yml/badge.svg?branch=develop)](https://github.com/CollaborativeRoboticsLab/omron_handsolo/actions/workflows/compile.yml?query=branch%3Adevelop) |
+| humble | Humble | [![humble](https://github.com/CollaborativeRoboticsLab/omron_handsolo/actions/workflows/compile.yml/badge.svg?branch=humble)](https://github.com/CollaborativeRoboticsLab/omron_handsolo/actions/workflows/compile.yml?query=branch%3Ahumble) |
+
 
 ## Setup
 

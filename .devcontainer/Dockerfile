@@ -1,4 +1,4 @@
-FROM ros:humble
+FROM ros:jazzy
 
 # Add vscode user with same UID and GID as your host system
 # (modified from https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user#_creating-a-nonroot-user)
@@ -52,12 +52,12 @@ RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 # make sure folders exist
 WORKDIR /home/$USERNAME/colcon_ws/src 
 
-RUN git clone https://github.com/CollaborativeRoboticsLab/omron_arm.git -b develop
-RUN git clone https://github.com/CollaborativeRoboticsLab/omron_base.git -b develop
-RUN git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git -b develop
-RUN git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git -b develop
+RUN git clone https://github.com/CollaborativeRoboticsLab/tmr_ros2.git
+RUN git clone https://github.com/CollaborativeRoboticsLab/omron_amr.git
+RUN git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git
+RUN git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git
 
 # Install python packages
-RUN pip3 install --no-cache-dir pymodbus
+RUN pip3 install --no-cache-dir --break-system-packages pymodbus
 
 ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp

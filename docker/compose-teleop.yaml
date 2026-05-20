@@ -1,7 +1,7 @@
 services:
   omron_handsolo:
     container_name: omron_handsolo
-    image: ghcr.io/collaborativeroboticslab/omron_handsolo:humble
+    image: ghcr.io/collaborativeroboticslab/omron_handsolo:jazzy
     command: ros2 launch moma_ros ld250_tm12x.teleop.launch.py
     environment:
       - PYTHONUNBUFFERED=1                # GUI related
