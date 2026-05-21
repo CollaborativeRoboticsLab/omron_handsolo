@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ld250_tm12x">
+
+  <!-- Arguments -->
+  <xacro:arg name="ns" default=""/>
+  <xacro:arg name="arm_prefix" default=""/>
+  <xacro:arg name="base_prefix" default="virtual_hand_solo/"/>
+  <xacro:arg name="arm_color" default="none"/>
+  <xacro:arg name="laser_frame" default="lidar_link"/>
+  <xacro:arg name="trans_hw_iface" default="hardware_interface/PositionJointInterface"/>
+  <xacro:arg name="arm_base_link" default="base_link"/>
+  <xacro:arg name="controlbox_mesh_pkg" default="moma_description"/>
+
+  <!-- =============================================================== -->
+  <!--                   LD250 related configuration                   -->
+  <!-- =============================================================== -->
+
+  <!-- Includes -->
+  <xacro:include filename="$(find handsolo_description)/xacro/ld250.urdf.xacro"/>  
+  
+  <!-- LD250 mobile base -->
+  <xacro:ld250 prefix="$(arg base_prefix)" laser_frame_name="$(laser_frame)" mesh_pkg="amr_description"/>
+
+  <!-- =============================================================== -->
+  <!--                   TM12x related configuration                   -->
+  <!-- =============================================================== -->
+
+  <!-- TM12x macro set -->
+  <xacro:include filename="$(find tm_description)/xacro/macro.gazebo.xacro" />
+  <xacro:include filename="$(find tm_description)/xacro/macro.transmission.xacro" />
+  <xacro:include filename="$(find tm_description)/xacro/macro.tm12x-nominal.urdf.xacro" />
+
+  <xacro:property name="arm_color_val" value="$(arg arm_color)"/>
+  <xacro:property name="tm_effective_arm_color" value="${
+    'moma_tm_none' if arm_color_val == 'none' else
+    'moma_tm_lightgrey' if arm_color_val == 'lightgrey' else
+    'moma_tm_grey' if arm_color_val == 'grey' else
+    'moma_tm_white' if arm_color_val == 'white' else
+    'moma_tm_red' if arm_color_val == 'red' else
+    'moma_tm_orange' if arm_color_val == 'orange' else
+    'moma_tm_yellow' if arm_color_val == 'yellow' else
+    'moma_tm_green' if arm_color_val == 'green' else
+    'moma_tm_blue' if arm_color_val == 'blue' else
+    'moma_tm_indigo' if arm_color_val == 'indigo' else
+    'moma_tm_violet' if arm_color_val == 'violet' else
+    'moma_tm_black' if arm_color_val == 'black' else
+    'moma_tm_darkolive' if arm_color_val == 'darkolive' else
+    arm_color_val
+  }"/>
+
+  <material name="moma_tm_none">
+    <color rgba="0.0 0.0 0.0 1.0" />
+  </material>
+  <material name="moma_tm_lightgrey">
+    <color rgba="0.5 0.5 0.5 1.0" />
+  </material>
+  <material name="moma_tm_grey">
+    <color rgba="0.75 0.75 0.75 1.0" />
+  </material>
+  <material name="moma_tm_white">
+    <color rgba="0.95 0.95 0.95 1.0" />
+  </material>
+  <material name="moma_tm_red">
+    <color rgba="0.95 0.0 0.0 1.0" />
+  </material>
+  <material name="moma_tm_orange">
+    <color rgba="1.0 0.5 0.0 1.0" />
+  </material>
+  <material name="moma_tm_yellow">
+    <color rgba="1.0 1.0 0.0 1.0" />
+  </material>
+  <material name="moma_tm_green">
+    <color rgba="0.0 1.0 0.0 1.0" />
+  </material>
+  <material name="moma_tm_blue">
+    <color rgba="0.0 0.0 1.0 1.0" />
+  </material>
+  <material name="moma_tm_indigo">
+    <color rgba="0.3 0.3 0.6 1.0" />
+  </material>
+  <material name="moma_tm_violet">
+    <color rgba="0.6 0.0 1.0 1.0" />
+  </material>
+  <material name="moma_tm_black">
+    <color rgba="0.0 0.0 0.0 1.0" />
+  </material>
+  <material name="moma_tm_darkolive">
+    <color rgba="0.3 0.3 0.25 1.0" />
+  </material>
+
+  <!-- TM12x arm (gazebo/transmission/material macros) -->
+  <xacro:tmr_gazebo ns="$(arg ns)" prefix="$(arg arm_prefix)" />
+  <xacro:tmr_transmission prefix="$(arg arm_prefix)" hw_iface="$(arg trans_hw_iface)" />
+
+  <!-- TM12x geometry -->
+  <!-- If the arm color is 'none' -->
+  <xacro:if value="${arm_color_val == 'none'}">
+    <xacro:tm12x ns="$(arg ns)" prefix="$(arg arm_prefix)" color="${tm_effective_arm_color}"/>
+  </xacro:if>
+  <!-- If the arm color is not 'none', include the colored version -->
+  <xacro:unless value="${arm_color_val == 'none'}">
+    <xacro:tm12x ns="$(arg ns)" prefix="$(arg arm_prefix)" color="${tm_effective_arm_color}" format="stl"/>
+  </xacro:unless>
+
+  <!-- =============================================================== -->
+  <!--             TM12x Control box related configuration             -->
+  <!-- =============================================================== -->
+
+  <link name="controlbox">
+    <visual>
+      <origin rpy="0 0 3.141582654" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://$(arg controlbox_mesh_pkg)/meshes/controlbox/LD250.obj"/>
+      </geometry>
+      <material name="controlbox_white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 3.141592654" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://$(arg controlbox_mesh_pkg)/meshes/controlbox/LD250.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4.07"/>
+      <inertia ixx="0.426" ixy="0.0" ixz="0.0" iyy="0.496" iyz="0.0" izz="0.91"/>
+    </inertial>
+  </link>
+
+  <!-- =============================================================== -->
+  <!--                Joint Connection configuration                   -->
+  <!-- =============================================================== -->
+
+  <!-- Mount the TM12x control box base to the LD250 base_link -->
+  <joint name="ld250_to_controlbox" type="fixed">
+    <parent link="$(arg base_prefix)base_link"/>
+    <child link="controlbox"/>
+    <!-- <origin xyz="0.2 0 0.34" rpy="0 0 0"/> -->
+    <origin xyz="0 0 0.38" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Mount the TM12x base to TM12x control box base -->
+  <joint name="controlbox_to_tm12x_mount" type="fixed">
+    <parent link="controlbox"/>
+    <child link="$(arg arm_prefix)base"/>
+    <origin xyz="0.21 0 0.33" rpy="0 0 0"/>
+  </joint>
+
+  <!--
+    Dimensions (from https://files.omron.eu/downloads/latest/datasheet/en/i828_ld-series_mobile_robot_datasheet_en.pdf?v=2):
+    - length: 970 mm
+    - width: 720 mm
+    - base height: 380 mm
+    - laser glass center height: 190 mm
+
+    Dimensions roughly measured
+    - laser glass offset front: 35 mm
+    - laser glass offset back: 135 mm
+
+    - arm base front from robot front: 180 mm
+    - arm base back from robot front: 380 mm
+    - arm base left from robot left: 245 mm
+    - arm base right from robot right: 250 mm
+    - arm base bottom from ld250 top: 320 mm
+
+    - control box height: 325 mm
+    - control box center to arm base: 198 mm
+
+    Calaculated from the above dimensions:
+    - arm center from the middle of the robot: (970/2 - 380 + (380-180)/2) mm
+                                             : (485 - 380 + 100) mm
+                                             : 205 mm
+  -->
+</robot>
