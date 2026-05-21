@@ -53,7 +53,7 @@ def generate_launch_description():
     robot_description = {'robot_description': robot_description_config.toxml()}
 
     # SRDF Configuration
-    robot_description_semantic_config = load_file('tm12x_moveit_config'  , 'config/tm12x.srdf')
+    robot_description_semantic_config = load_file('handsolo_ros', 'config/ld250_tm12x.srdf')
     robot_description_semantic = {'robot_description_semantic': robot_description_semantic_config}
 
     # Planning Configuration
