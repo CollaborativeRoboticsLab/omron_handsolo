@@ -21,17 +21,17 @@ def generate_launch_description():
     )
 
     # Static transform publisher
-    static_tf = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='static_base_to_lidar',
-        arguments=[
-            '0', '0', '0',           # x y z
-            '1', '0', '0', '0',      # qx qy qz qw 
-            'virtual_hand_solo/base_link',
-            'virtual_hand_solo/lidar_link'
-        ]
-    )
+    # static_tf = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     name='static_base_to_lidar',
+    #     arguments=[
+    #         '0', '0', '0',           # x y z
+    #         '1', '0', '0', '0',      # qx qy qz qw 
+    #         'virtual_hand_solo/base_link',
+    #         'virtual_hand_solo/lidar_link'
+    #     ]
+    # )
 
     # Map Server - Lifecycle Node
     map_server = LifecycleNode(
@@ -177,7 +177,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         declare_use_sim_time,
-        static_tf,
+        # static_tf,
         map_server,
         amcl,
         lifecycle_manager_localization,

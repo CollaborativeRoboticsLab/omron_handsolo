@@ -115,18 +115,18 @@ def generate_launch_description():
     )
 
     # Virtual Hand Solo to Base Link  Static TF
-    static_tf_node = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='static_transform_publisher',
-        output='log',
-        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'virtual_hand_solo/base_link', 'base']
-    )
+    # static_tf_node = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     name='static_transform_publisher',
+    #     output='log',
+    #     arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'virtual_hand_solo/base_link', 'base']
+    # )
 
 
     return LaunchDescription([
         run_move_group_node,
-        static_tf_node
+        # static_tf_node
         ])
 
     

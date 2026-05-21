@@ -41,7 +41,7 @@ def _create_hardware_actions(context, tm_robot_ip, tm_use_simulation, robot_desc
         actions.append(
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
-                    os.path.join(get_package_share_directory('amr_ros'), 'launch', 'ld250.launch.py')
+                    os.path.join(get_package_share_directory('amr_ros'), 'launch', 'amr_core.launch.py')
                 ),
                 launch_arguments={
                     'robot_description_override': robot_description_override,
