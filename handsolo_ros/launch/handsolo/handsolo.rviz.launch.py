@@ -47,7 +47,7 @@ def generate_launch_description():
         os.path.join(
             get_package_share_directory('handsolo_description'),
             'xacro',
-            'handsolo.urdf.xacro',
+            'ld250_tm12x.urdf.xacro',
         )
     )
     robot_description = {'robot_description': robot_description_config.toxml()}

@@ -11,7 +11,7 @@ def _is_enabled(context, name):
     return LaunchConfiguration(name).perform(context).lower() == 'true'
 
 
-def _create_optional_launches(context, moma_ros_share, handsolo_ros_share):
+def _create_optional_launches(context, handsolo_ros_share):
     actions = []
 
     use_arm_enabled = _is_enabled(context, 'use_arm')
@@ -115,14 +115,12 @@ def generate_launch_description():
         description='Whether to start Nav2 (true/false)'
     )
 
-    # Paths to included launch files (within moma_ros)
-    moma_ros_share = get_package_share_directory('moma_ros')
+    # Paths to included launch files
     handsolo_ros_share = get_package_share_directory('handsolo_ros')
     
-    # Reuse ld250_tm12x.hardware.launch.py launch file as everything is same.
     include_hardware = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(moma_ros_share, 'launch', 'ld250_tm12x', 'ld250_tm12x.hardware.launch.py')
+            os.path.join(handsolo_ros_share, 'launch', 'handsolo', 'handsolo.hardware.launch.py')
         ),
         launch_arguments={
             'tm_use_simulation': tm_use_simulation,
@@ -141,5 +139,5 @@ def generate_launch_description():
         declare_use_moveit,
         declare_use_nav2,
         include_hardware,
-        OpaqueFunction(function=lambda context: _create_optional_launches(context, moma_ros_share, handsolo_ros_share))
+        OpaqueFunction(function=lambda context: _create_optional_launches(context, handsolo_ros_share))
     ])
