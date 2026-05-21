@@ -27,7 +27,7 @@ def generate_launch_description():
         name='static_base_to_lidar',
         arguments=[
             '0', '0', '0',           # x y z
-            '1', '0', '0', '0',      # qx qy qz qw 
+            '0', '0', '0', '1',      # qx qy qz qw 
             'virtual_hand_solo/base_link',
             'virtual_hand_solo/lidar_link'
         ]

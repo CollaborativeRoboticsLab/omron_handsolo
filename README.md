@@ -1,8 +1,8 @@
-# omron_handsolo
+# Omron Hand Solo
 
 
 
-This repository allows connecting a Digital twin using packages,
+This repository allows connecting the Hand Solo digital twin using packages,
 
 - [tmr_ros2](https://github.com/CollaborativeRoboticsLab/tmr_ros2) package 
 - [omron_amr](https://github.com/CollaborativeRoboticsLab/omron_amr) package
@@ -31,7 +31,7 @@ cd omron_ws/src
 
 Install dependencies
 ```sh
-sudo apt install ros-humble-moveit ros-humble-controller-manager ros-humble-joint-trajectory-controller ros-humble-joint-state-broadcaster ros-humble-rmw-cyclonedds-cpp ros-humble-joint-state-publisher ros-humble-joint-state-publisher-gui ros-humble-vision-opencv ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-slam-toolbox
+sudo apt install ros-jazzy-moveit ros-jazzy-controller-manager ros-jazzy-joint-trajectory-controller ros-jazzy-joint-state-broadcaster ros-jazzy-rmw-cyclonedds-cpp ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher-gui ros-jazzy-vision-opencv ros-jazzy-navigation2 ros-jazzy-nav2-bringup ros-jazzy-slam-toolbox
 ```
 ```sh
 pip install pymodbus
@@ -40,8 +40,8 @@ pip install pymodbus
 Clone the repositories into the `src` folder by
 
 ```sh
-git clone https://github.com/CollaborativeRoboticsLab/omron_arm.git
-git clone https://github.com/CollaborativeRoboticsLab/omron_base.git
+git clone https://github.com/CollaborativeRoboticsLab/tmr_ros2.git
+git clone https://github.com/CollaborativeRoboticsLab/omron_amr.git
 git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git
 git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git
 git clone https://github.com/CollaborativeRoboticsLab/omron_handsolo.git
@@ -55,20 +55,55 @@ colcon build
 ```
 **or save time and use devcontainer** 
 
+## Launch Parameters
+
+The top-level launch entry point is `ros2 launch handsolo_ros handsolo.launch.py`.
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `tm_use_simulation` | `false` | Runs the TM arm bringup in simulation mode instead of connecting to the physical arm. |
+| `tm_robot_ip` | `192.168.1.2` | IP address of the TM arm controller. |
+| `use_arm` | `true` | Starts the TM arm hardware stack. If `false`, the arm hardware and MoveIt are not started. |
+| `use_base` | `true` | Starts the AMR base hardware stack. If `false`, the base hardware, Nav2, and the HandSolo velocity filter are not started. |
+| `use_moveit` | `true` | Starts MoveIt for the arm. This is only effective when `use_arm:=true`. |
+| `use_nav2` | `true` | Starts Nav2 for the mobile base. This is only effective when `use_base:=true`. |
+| `use_rviz` | `false` | Starts RViz. When enabled, the launch uses the MoveIt RViz layout if the arm and MoveIt are active, otherwise it uses the Nav2 RViz layout. |
+
 ## Usage
 
-### Start the system headless
+### Start the full system headless
 
 ```bash
 source install/setup.bash
 ros2 launch handsolo_ros handsolo.launch.py
 ```
 
-### Start the system with RVIZ
+### Start the full system with RVIZ
 
 ```bash
 source install/setup.bash
 ros2 launch handsolo_ros handsolo.launch.py use_rviz:=true
+```
+
+### Start the full system without Nav2 or MoveIt to evaluate the hardware connection
+
+```bash
+source install/setup.bash
+ros2 launch handsolo_ros handsolo.launch.py use_nav2:=false use_moveit:=false
+```
+
+### Start the arm only to control the arm and gripper using RVIZ
+
+```bash
+source install/setup.bash
+ros2 launch handsolo_ros handsolo.launch.py use_base:=false use_rviz:=true
+```
+
+### Start the base only to control just the base using RVIZ
+
+```bash
+source install/setup.bash
+ros2 launch handsolo_ros handsolo.launch.py use_arm:=false use_rviz:=true
 ```
 
 ### Start the system with arm in simulation mode

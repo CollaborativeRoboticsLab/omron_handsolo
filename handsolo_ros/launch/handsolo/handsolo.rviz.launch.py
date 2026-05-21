@@ -4,7 +4,9 @@ import yaml
 import json
 import xacro
 from launch import LaunchDescription
-from launch.substitutions import Command
+from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition, UnlessCondition
+from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import PathJoinSubstitution
@@ -32,6 +34,14 @@ def load_yaml(package_name, file_path):
         return None
 
 def generate_launch_description():
+    use_moveit = LaunchConfiguration('use_moveit')
+
+    declare_use_moveit = DeclareLaunchArgument(
+        'use_moveit',
+        default_value='true',
+        description='Whether to start RViz with the MoveIt configuration'
+    )
+
     # Configure robot_description
     robot_description_config = xacro.process_file(
         os.path.join(
@@ -79,6 +89,7 @@ def generate_launch_description():
         output='log',
         emulate_tty=True,
         arguments=['-d', moveit_rviz_config],
+        condition=IfCondition(use_moveit),
         parameters=[
             robot_description,
             robot_description_semantic,
@@ -94,11 +105,13 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz2',
         arguments=['-d', nav2_rviz_cfg],
+        condition=UnlessCondition(use_moveit),
         # parameters=[{'use_sim_time': use_sim_time}],
         output='log'
     )
 
     return LaunchDescription([
+        declare_use_moveit,
         moveit_rviz_node, 
         nav2_rviz_node
     ])
