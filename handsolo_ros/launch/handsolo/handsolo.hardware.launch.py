@@ -45,6 +45,9 @@ def _create_hardware_actions(context, tm_robot_ip, tm_use_simulation, robot_desc
                 ),
                 launch_arguments={
                     'robot_description_override': robot_description_override,
+                    'extra_params_file': os.path.join(
+                        get_package_share_directory('handsolo_ros'), 'config', 'handsolo-ld250.yaml'
+                    ),
                     'rviz': 'false',
                 }.items(),
             )

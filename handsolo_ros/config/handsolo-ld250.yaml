@@ -1,0 +1,14 @@
+amr_core:
+  ros__parameters:
+    status:
+      publish: false
+
+    laser:
+      main_laser:
+        enabled: false
+      low_laser:
+        enabled: false
+
+    driver:
+      publish_odom: false
+      publish_robot_tf: false

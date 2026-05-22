@@ -67,7 +67,7 @@ The top-level launch entry point is `ros2 launch handsolo_ros handsolo.launch.py
 | `use_base` | `true` | Starts the AMR base hardware stack. If `false`, the base hardware, Nav2, and the HandSolo velocity filter are not started. |
 | `use_moveit` | `true` | Starts MoveIt for the arm. This is only effective when `use_arm:=true`. |
 | `use_nav2` | `true` | Starts Nav2 for the mobile base. This is only effective when `use_base:=true`. |
-| `use_rviz` | `false` | Starts RViz. When enabled, the launch uses the MoveIt RViz layout if the arm and MoveIt are active, otherwise it uses the Nav2 RViz layout. |
+| `use_rviz` | `false` | Starts RViz. MoveIt RViz and Nav2 RViz are controlled independently by `use_moveit` and `use_nav2`. |
 
 ## Usage
 
@@ -84,6 +84,8 @@ ros2 launch handsolo_ros handsolo.launch.py
 source install/setup.bash
 ros2 launch handsolo_ros handsolo.launch.py use_rviz:=true
 ```
+
+When both `use_moveit:=true` and `use_nav2:=true`, the launch starts separate RViz windows for MoveIt and Nav2.
 
 ### Start the full system without Nav2 or MoveIt to evaluate the hardware connection
 
@@ -105,6 +107,19 @@ ros2 launch handsolo_ros handsolo.launch.py use_base:=false use_rviz:=true
 source install/setup.bash
 ros2 launch handsolo_ros handsolo.launch.py use_arm:=false use_rviz:=true
 ```
+
+## Digital twin AMR override
+
+HandSolo layers [handsolo-ld250.yaml](./handsolo_ros/config/handsolo-ld250.yaml) on top of `omron_amr`'s LD250 defaults.
+
+That override disables AMR-published:
+
+- status topics
+- laser scans
+- odometry
+- `odom -> base_link` TF
+
+This keeps `amr_core` available as the command bridge while the digital twin remains the source of robot state.
 
 ### Start the system with arm in simulation mode
 

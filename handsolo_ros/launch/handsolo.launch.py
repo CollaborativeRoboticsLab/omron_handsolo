@@ -46,6 +46,7 @@ def _create_optional_launches(context, handsolo_ros_share):
                 ),
                 launch_arguments={
                     'use_moveit': 'true' if use_arm_enabled and use_moveit_enabled else 'false',
+                    'use_nav2': 'true' if use_base_enabled and use_nav2_enabled else 'false',
                 }.items(),
             )
         )
