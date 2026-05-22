@@ -1,0 +1,12 @@
+amr_core:
+  ros__parameters:
+    source_data:
+      publish: false
+
+    laser_scans:
+      publish: false
+
+    driver:
+      publish_odom: false
+      publish_robot_tf: false
+      reset_odometer_on_startup: false
