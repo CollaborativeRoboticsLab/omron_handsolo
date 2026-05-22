@@ -6,7 +6,6 @@
   <xacro:arg name="ns" default=""/>
   <xacro:arg name="arm_prefix" default=""/>
   <xacro:arg name="base_prefix" default="virtual_hand_solo/"/>
-  <xacro:arg name="laser_frame" default="lidar_link"/>
   <xacro:arg name="arm_color" default="none"/>
   <xacro:arg name="trans_hw_iface" default="hardware_interface/PositionJointInterface"/>
   <xacro:arg name="arm_base_link" default="base_link"/>
