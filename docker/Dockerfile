@@ -69,7 +69,7 @@ RUN git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git
 RUN git clone https://github.com/CollaborativeRoboticsLab/tmr_ros2.git -b humble
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_amr.git -b humble
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git -b humble
-RUN git clone https://github.com/CollaborativeRoboticsLab/omron_handsolo.git
+RUN git clone https://github.com/CollaborativeRoboticsLab/omron_handsolo.git -b humble
 
 WORKDIR ${WORKSPACE_ROOT}
 
