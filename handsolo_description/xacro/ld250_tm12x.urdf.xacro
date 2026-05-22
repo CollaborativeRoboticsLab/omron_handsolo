@@ -17,10 +17,10 @@
   <!-- =============================================================== -->
 
   <!-- Includes -->
-  <xacro:include filename="$(find amr_description)/xacro/ld250.urdf.xacro"/>  
+  <xacro:include filename="$(find handsolo_description)/xacro/ld250.urdf.xacro"/>  
   
   <!-- LD250 mobile base -->
-  <xacro:ld250 prefix="$(arg base_prefix)" laser_frame_name="$(arg laser_frame)" mesh_pkg="amr_description"/>
+  <xacro:ld250 prefix="$(arg base_prefix)" mesh_pkg="amr_description"/>
 
   <!-- =============================================================== -->
   <!--                   TM12x related configuration                   -->
