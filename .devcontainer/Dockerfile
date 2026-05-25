@@ -54,7 +54,7 @@ WORKDIR /home/$USERNAME/colcon_ws/src
 
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_gripper.git
 RUN git clone https://github.com/CollaborativeRoboticsLab/tmr_ros2.git -b humble
-RUN git clone --recursive https://github.com/CollaborativeRoboticsLab/omron_amr.git -b humble-libaria
+RUN git clone --recursive https://github.com/CollaborativeRoboticsLab/omron_amr.git -b humble
 RUN git clone https://github.com/CollaborativeRoboticsLab/omron_moma.git -b humble
 
 # Install python packages

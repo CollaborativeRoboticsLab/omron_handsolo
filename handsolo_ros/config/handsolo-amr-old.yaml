@@ -1,15 +1,13 @@
 amr_core:
   ros__parameters:
-    status:
+    source_data:
       publish: false
 
-    laser:
-      main_laser:
-        enabled: false
-      low_laser:
-        enabled: false
+    laser_scans:
+      publish: false
 
     driver:
       publish_odom: false
       publish_robot_tf: false
       cmd_vel_topic: "/amr/cmd_vel"
+      reset_odometer_on_startup: false
