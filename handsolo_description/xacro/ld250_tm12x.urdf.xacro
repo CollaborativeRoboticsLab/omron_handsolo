@@ -106,27 +106,8 @@
   <!--             TM12x Control box related configuration             -->
   <!-- =============================================================== -->
 
-  <link name="controlbox">
-    <visual>
-      <origin rpy="0 0 3.141582654" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://$(arg controlbox_mesh_pkg)/meshes/controlbox/LD250.obj"/>
-      </geometry>
-      <material name="controlbox_white">
-        <color rgba="1 1 1 1"/>
-      </material>
-    </visual>
-    <collision>
-      <origin rpy="0 0 3.141592654" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://$(arg controlbox_mesh_pkg)/meshes/controlbox/LD250.obj"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="4.07"/>
-      <inertia ixx="0.426" ixy="0.0" ixz="0.0" iyy="0.496" iyz="0.0" izz="0.91"/>
-    </inertial>
-  </link>
+  <xacro:include filename="$(find moma_description)/xacro/controlbox_ld250.urdf.xacro"/>
+  <xacro:controlbox_ld250 mesh_pkg="$(arg controlbox_mesh_pkg)" link_name="controlbox"/>
 
   <!-- =============================================================== -->
   <!--                Joint Connection configuration                   -->
