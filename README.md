@@ -78,6 +78,7 @@ cd omron_handsolo/docker
 
 Pull the Docker image and start compose (No need to run `docker compose build`)
 ```bash
+xhost +local:root
 docker compose pull
 docker compose up
 ```
