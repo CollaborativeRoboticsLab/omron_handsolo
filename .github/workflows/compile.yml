@@ -6,12 +6,12 @@ on:
   push:
     branches:
       - main
-      - develop
+      - humble
 
   pull_request:
     branches:
       - main
-      - develop
+      - humble
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
