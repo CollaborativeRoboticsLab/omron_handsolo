@@ -1,5 +1,5 @@
 {
-  "name": "Omron Handsolo Dev Container Jazzy",
+  "name": "Omron Handsolo Jazzy Dev Container",
   "dockerFile": "Dockerfile",
   "remoteUser": "ubuntu",
   "containerEnv": {
@@ -15,12 +15,12 @@
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_history,target=/home/ubuntu/.bash_history,type=bind",
     "source=/dev,target=/dev,type=bind"
   ],
-  "customizations": { 
+  "customizations": {
     "vscode": {
-        "extensions": [
-            "ms-vscode.cpptools",
-            "ms-vscode.cmake-tools"
-          ]
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools"
+      ]
     }
   }
 }

@@ -5,11 +5,11 @@ on:
 
   push:
     branches: 
-      - main
+      - humble
 
   pull_request:
     branches: 
-      - main
+      - humble
 
 env:
   REGISTRY: ghcr.io
@@ -53,5 +53,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble
