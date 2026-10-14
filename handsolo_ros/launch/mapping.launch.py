@@ -19,15 +19,15 @@ def generate_launch_description():
             arguments=['-d', rviz_cfg],
             parameters=[{'use_sim_time': False}]
         ),
-        Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name='static_base_to_lidar',
-            arguments=[
-                '0','0','0',            # x y z
-                '1','0','0','0',        # qx qy qz qw  (use 0 0 0 1 for identity)
-                'virtual_hand_solo/base_link',
-                'virtual_hand_solo/lidar_link'
-            ]
-        ),
+        # Node(
+        #     package='tf2_ros',
+        #     executable='static_transform_publisher',
+        #     name='static_base_to_lidar',
+        #     arguments=[
+        #         '0','0','0',            # x y z
+        #         '1','0','0','0',        # qx qy qz qw  (use 0 0 0 1 for identity)
+        #         'virtual_hand_solo/base_link',
+        #         'virtual_hand_solo/lidar_link'
+        #     ]
+        # ),
     ])

@@ -34,13 +34,13 @@ def generate_launch_description():
         os.path.join(
             get_package_share_directory('handsolo_description'),
             'xacro',
-            'handsolo.urdf.xacro',
+            'ld250_tm12x.urdf.xacro',
         )
     )
     robot_description = {'robot_description': robot_description_config.toxml()}
 
     # SRDF Configuration
-    robot_description_semantic_config = load_file('tm12x_moveit_config'  , 'config/tm12x.srdf')
+    robot_description_semantic_config = load_file('handsolo_ros', 'config/ld250_tm12x.srdf')
     robot_description_semantic = {'robot_description_semantic': robot_description_semantic_config}
 
     # Kinematics
@@ -115,18 +115,18 @@ def generate_launch_description():
     )
 
     # Virtual Hand Solo to Base Link  Static TF
-    static_tf_node = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='static_transform_publisher',
-        output='log',
-        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'virtual_hand_solo/base_link', 'base']
-    )
+    # static_tf_node = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     name='static_transform_publisher',
+    #     output='log',
+    #     arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'virtual_hand_solo/base_link', 'base']
+    # )
 
 
     return LaunchDescription([
         run_move_group_node,
-        static_tf_node
+        # static_tf_node
         ])
 
     

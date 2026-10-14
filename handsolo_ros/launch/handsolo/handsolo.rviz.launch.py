@@ -1,10 +1,10 @@
 import os
-import sys
 import yaml
-import json
 import xacro
 from launch import LaunchDescription
-from launch.substitutions import Command
+from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import PathJoinSubstitution
@@ -32,18 +32,33 @@ def load_yaml(package_name, file_path):
         return None
 
 def generate_launch_description():
+    use_moveit = LaunchConfiguration('use_moveit')
+    use_nav2 = LaunchConfiguration('use_nav2')
+
+    declare_use_moveit = DeclareLaunchArgument(
+        'use_moveit',
+        default_value='true',
+        description='Whether to start RViz with the MoveIt configuration'
+    )
+
+    declare_use_nav2 = DeclareLaunchArgument(
+        'use_nav2',
+        default_value='false',
+        description='Whether to start RViz with the Nav2 configuration'
+    )
+
     # Configure robot_description
     robot_description_config = xacro.process_file(
         os.path.join(
             get_package_share_directory('handsolo_description'),
             'xacro',
-            'handsolo.urdf.xacro',
+            'ld250_tm12x.urdf.xacro',
         )
     )
     robot_description = {'robot_description': robot_description_config.toxml()}
 
     # SRDF Configuration
-    robot_description_semantic_config = load_file('tm12x_moveit_config'  , 'config/tm12x.srdf')
+    robot_description_semantic_config = load_file('handsolo_ros', 'config/ld250_tm12x.srdf')
     robot_description_semantic = {'robot_description_semantic': robot_description_semantic_config}
 
     # Planning Configuration
@@ -75,10 +90,11 @@ def generate_launch_description():
     moveit_rviz_node = Node(
         package='rviz2',
         executable='rviz2',
-        name='rviz2',
+        name='rviz2_moveit',
         output='log',
         emulate_tty=True,
         arguments=['-d', moveit_rviz_config],
+        condition=IfCondition(use_moveit),
         parameters=[
             robot_description,
             robot_description_semantic,
@@ -92,13 +108,16 @@ def generate_launch_description():
     nav2_rviz_node = Node(
         package='rviz2',
         executable='rviz2',
-        name='rviz2',
+        name='rviz2_nav2',
         arguments=['-d', nav2_rviz_cfg],
+        condition=IfCondition(use_nav2),
         # parameters=[{'use_sim_time': use_sim_time}],
         output='log'
     )
 
     return LaunchDescription([
+        declare_use_moveit,
+        declare_use_nav2,
         moveit_rviz_node, 
         nav2_rviz_node
     ])

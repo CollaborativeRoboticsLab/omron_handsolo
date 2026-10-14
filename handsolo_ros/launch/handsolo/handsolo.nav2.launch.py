@@ -7,7 +7,7 @@ from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
     # File paths
-    map_yaml = PathJoinSubstitution([FindPackageShare('handsolo_ros'), 'map', 'warehouse_01.yaml'])
+    map_yaml = PathJoinSubstitution([FindPackageShare('handsolo_ros'), 'map', 'warehouse_with_conveyer.yaml'])
     nav2_params = PathJoinSubstitution([FindPackageShare('handsolo_ros'), 'config', 'handsolo-nav2.yaml'])
     
     # Launch arguments (optional - for flexibility)
@@ -18,19 +18,6 @@ def generate_launch_description():
         'use_sim_time',
         default_value='false',
         description='Use simulation time'
-    )
-
-    # Static transform publisher
-    static_tf = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='static_base_to_lidar',
-        arguments=[
-            '0', '0', '0',           # x y z
-            '1', '0', '0', '0',      # qx qy qz qw 
-            'virtual_hand_solo/base_link',
-            'virtual_hand_solo/lidar_link'
-        ]
     )
 
     # Map Server - Lifecycle Node
@@ -177,7 +164,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         declare_use_sim_time,
-        static_tf,
+        # static_tf,
         map_server,
         amcl,
         lifecycle_manager_localization,
