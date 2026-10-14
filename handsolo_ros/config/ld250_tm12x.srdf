@@ -48,6 +48,11 @@
         <joint name="joint_6" value="0"/>
     </group_state>
     <virtual_joint name="FixedBase" type="fixed" parent_frame="world" child_link="virtual_hand_solo/base_link"/>
+    <disable_collisions link1="virtual_hand_solo/base_link" link2="controlbox" reason="Adjacent"/>
+    <disable_collisions link1="virtual_hand_solo/base_link" link2="link_0" reason="Never"/>
+    <disable_collisions link1="virtual_hand_solo/base_link" link2="link_1" reason="Never"/>
+    <disable_collisions link1="controlbox" link2="link_0" reason="Adjacent"/>
+    <disable_collisions link1="controlbox" link2="link_1" reason="Never"/>
     <disable_collisions link1="link_0" link2="link_1" reason="Adjacent"/>
     <disable_collisions link1="link_0" link2="link_2" reason="Never"/>
     <disable_collisions link1="link_0" link2="link_4" reason="Never"/>

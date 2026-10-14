@@ -125,7 +125,7 @@ This keeps `amr_core` available as the command bridge while the digital twin rem
 
 ```bash
 source install/setup.bash
-ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=true
+ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=true use_rviz:=true
 ```
 
 ## Docker
